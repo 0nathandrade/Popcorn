@@ -1,5 +1,10 @@
 import { useEffect, useState } from "react";
+
 import Tmdb from "./Tmdb";
+import Category from "./components/Category";
+
+import { GlobalStyle } from "./style/global";
+
 
 interface ListType {
   slug: string;
@@ -16,6 +21,7 @@ function App() {
       // Pegando Lista Total
       let list = await Tmdb.getHomeList();
       setMovieList(list);
+      console.log(list);
     }
 
     loadAll();
@@ -23,7 +29,11 @@ function App() {
 
   return (
     <>
-      Olá mundo
+      {movieList.map((item, key) => (
+        <Category key={key} title={item.title} items={item.items}/>
+      ))}
+
+      <GlobalStyle />
     </>
   )
 }
